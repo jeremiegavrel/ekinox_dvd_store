@@ -49,6 +49,7 @@ def cli():
     parser.add_argument(
         'file',
         default='-',
+        nargs='?',
         help="File containing the titles of all individual DVDs in the cart."
              "If not specified, takes input from stdin.",
     )
