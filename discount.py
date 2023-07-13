@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 BTTF_FILMS = [
     "Back to the Future 1",
@@ -37,3 +38,34 @@ def compute_price_with_bttf_discount(dvd_list):
         total += discounted_dvds * discount_price
 
     return total
+
+
+def cli():
+    parser = argparse.ArgumentParser(
+        "DVD discount calculator."
+    )
+    parser.add_argument(
+        'file',
+        default = '-',
+        help='File containing the titles of all individual DVDs in the cart',
+    )
+    args = parser.parse_args()
+    dvd_filename = args.file
+
+    if dvd_filename == '-':
+        dvd_file = sys.stdin
+    else:
+        dvd_file = open(args.file, 'r')
+    dvd_raw_list = dvd_file.read()
+    dvd_list = [
+        line
+        for line in dvd_raw_list.split('\n')
+        if line.strip()
+    ]
+
+    total = compute_price_with_bttf_discount(dvd_list)
+    print(total)
+
+
+if __name__ == '__main__':
+    cli()
