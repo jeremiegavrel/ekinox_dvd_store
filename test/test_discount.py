@@ -42,10 +42,21 @@ TEST_CASES = [
             "Ghostbusters",
             "La Guerre des Étoiles",
         ], 60
-    )
+    ),
+    (
+        [
+            "Back to the Future 1",
+            "Back to the Future 1",
+            "Back to the Future 1",
+        ], 45
+    ),
+    (
+        [], 0
+    ),
 ]
 
+
 @pytest.mark.parametrize('dvd_list,expected_total', TEST_CASES)
-def test_discount_bttf(dvd_list, expected_total):
+def test_computer_price_with_bttf_discount(dvd_list, expected_total):
     total = discount.compute_price_with_bttf_discount(dvd_list)
     assert total == expected_total

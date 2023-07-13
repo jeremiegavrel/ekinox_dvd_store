@@ -41,13 +41,16 @@ def compute_price_with_bttf_discount(dvd_list):
 
 
 def cli():
+    """Command-line interface for the DVD discount calculator."""
+
     parser = argparse.ArgumentParser(
         "DVD discount calculator."
     )
     parser.add_argument(
         'file',
-        default = '-',
-        help='File containing the titles of all individual DVDs in the cart',
+        default='-',
+        help="File containing the titles of all individual DVDs in the cart."
+             "If not specified, takes input from stdin.",
     )
     args = parser.parse_args()
     dvd_filename = args.file
@@ -58,7 +61,7 @@ def cli():
         dvd_file = open(args.file, 'r')
     dvd_raw_list = dvd_file.read()
     dvd_list = [
-        line
+        line.strip()
         for line in dvd_raw_list.split('\n')
         if line.strip()
     ]
